@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ClothCare Connect</title>
+    <meta
+      name="description"
+      content="A simple initiative page connecting NGOs that need clothing support with shops and helpers who can contribute."
+    />
+    <style>
+      :root {
+        --ink: #17201b;
+        --muted: #5c675f;
+        --paper: #fffaf1;
+        --leaf: #246b4f;
+        --leaf-dark: #174b39;
+        --rose: #c95559;
+        --sun: #f0b84b;
+        --sky: #dbeef2;
+        --line: rgba(23, 32, 27, 0.14);
+        --shadow: 0 14px 34px rgba(23, 32, 27, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .site-shell {
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 92vh;
+        display: grid;
+        align-items: center;
+        padding: 28px clamp(18px, 4vw, 64px) 44px;
+        background:
+          linear-gradient(90deg, rgba(255, 250, 241, 0.94) 0%, rgba(255, 250, 241, 0.84) 46%, rgba(255, 250, 241, 0.18) 100%),
+          url("./assets/hero-community.png") center right / cover no-repeat;
+      }
+
+      .topbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 22px clamp(18px, 4vw, 64px);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        width: min(520px, 70vw);
+      }
+
+      .brand-logo {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .nav-note {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .hero-content {
+        width: min(720px, 100%);
+        padding-top: 190px;
+      }
+
+      .eyebrow {
+        width: fit-content;
+        margin: 0 0 22px;
+        padding: 8px 12px;
+        border: 1px solid rgba(36, 107, 79, 0.22);
+        border-radius: 999px;
+        color: var(--leaf-dark);
+        background: rgba(255, 250, 241, 0.72);
+        font-size: 0.86rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 680px;
+        font-size: clamp(2.9rem, 8vw, 6.4rem);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .purpose {
+        margin: 26px 0 0;
+        max-width: 620px;
+        color: #303a34;
+        font-size: clamp(1.05rem, 2vw, 1.32rem);
+        line-height: 1.65;
+      }
+
+      .slogan {
+        margin: 16px 0 0;
+        max-width: 560px;
+        color: var(--leaf-dark);
+        font-size: clamp(1rem, 1.6vw, 1.16rem);
+        font-weight: 850;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .choice {
+        min-width: min(100%, 220px);
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 18px 20px;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 1.05rem;
+        font-weight: 850;
+        box-shadow: var(--shadow);
+        transition:
+          transform 180ms ease,
+          box-shadow 180ms ease,
+          filter 180ms ease;
+      }
+
+      .choice:hover,
+      .choice:focus-visible {
+        transform: translateY(-3px);
+        filter: saturate(1.08);
+        box-shadow: 0 18px 42px rgba(23, 32, 27, 0.18);
+        outline: none;
+      }
+
+      .choice-ngo {
+        background: var(--rose);
+      }
+
+      .choice-helper {
+        background: var(--leaf);
+      }
+
+      .choice svg {
+        width: 24px;
+        height: 24px;
+        flex: 0 0 auto;
+      }
+
+      .next-peek {
+        position: absolute;
+        right: clamp(18px, 4vw, 64px);
+        bottom: 24px;
+        width: min(320px, calc(100% - 36px));
+        padding: 16px 18px;
+        border-left: 4px solid var(--sun);
+        background: rgba(255, 250, 241, 0.86);
+        color: #354139;
+        box-shadow: 0 18px 44px rgba(23, 32, 27, 0.13);
+      }
+
+      .next-peek strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .content-band {
+        padding: 68px clamp(18px, 4vw, 64px);
+        background: #ffffff;
+      }
+
+      .section-grid {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: clamp(28px, 5vw, 72px);
+        align-items: start;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      .section-copy {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.75;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+
+      .step {
+        min-height: 190px;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fffdf8;
+      }
+
+      .step-number {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 8px;
+        background: var(--sky);
+        color: var(--leaf-dark);
+        font-weight: 900;
+      }
+
+      .step h3 {
+        margin: 20px 0 10px;
+        font-size: 1.1rem;
+      }
+
+      .step p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .footer {
+        padding: 34px clamp(18px, 4vw, 64px);
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        background: var(--paper);
+        text-align: center;
+      }
+
+      .initiative-band {
+        padding: 72px clamp(18px, 4vw, 64px);
+        background: var(--paper);
+      }
+
+      .initiative-content {
+        width: min(900px, 100%);
+        margin: 0 auto;
+      }
+
+      .initiative-content h2 {
+        margin-bottom: 24px;
+      }
+
+      .initiative-content p {
+        margin: 0 0 20px;
+        color: #303a34;
+        font-size: 1.05rem;
+        line-height: 1.85;
+      }
+
+      .initiative-content p:last-child {
+        margin-bottom: 0;
+      }
+
+      @media (max-width: 820px) {
+        .hero {
+          min-height: 96vh;
+          align-items: end;
+          padding-bottom: 148px;
+          background:
+            linear-gradient(180deg, rgba(255, 250, 241, 0.9) 0%, rgba(255, 250, 241, 0.76) 52%, rgba(255, 250, 241, 0.98) 100%),
+            url("./assets/hero-community.png") center top / auto 54% no-repeat;
+        }
+
+        .topbar {
+          align-items: flex-start;
+        }
+
+        .nav-note {
+          max-width: 170px;
+          text-align: right;
+          font-size: 0.82rem;
+        }
+
+        .brand {
+          width: min(360px, 62vw);
+        }
+
+        .hero-content {
+          padding-top: 380px;
+        }
+
+        .actions {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+
+        .choice {
+          width: 100%;
+        }
+
+        .next-peek {
+          left: 18px;
+          right: 18px;
+          width: auto;
+        }
+
+        .section-grid,
+        .steps {
+          grid-template-columns: 1fr;
+        }
+
+        .step {
+          min-height: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="site-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <header class="topbar" aria-label="Site header">
+          <a class="brand" href="#">
+            <img
+              class="brand-logo"
+              src="./clothcare-connect-logo.png"
+              alt="ClothCare Connect"
+            />
+          </a>
+          <span class="nav-note">Connecting need with generosity</span>
+        </header>
+
+        <div class="hero-content">
+          <p class="eyebrow">Community clothing support</p>
+          <h1 id="page-title">Share what is needed. Offer what you can.</h1>
+          <p class="purpose">
+            We believe that a simple act of giving can make a real difference in someone's life.
+            Our platform brings together clothing stores, NGOs, orphanages, and old-age homes,
+            making it easier for people and organizations to support those who need it most. By
+            creating meaningful connections, we aim to build stronger communities and spread
+            kindness, one donation at a time.
+          </p>
+          <p class="slogan">Clothes with purpose, support with dignity.</p>
+
+          <div class="actions" aria-label="Choose your form">
+            <a
+              class="choice choice-ngo"
+              href="https://forms.gle/5VkdccZhxrQThPrBA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>NGO</span>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </a>
+
+            <a
+              class="choice choice-helper"
+              href="https://forms.gle/ERiUFAL7UGDQejsw8"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Helper</span>
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <aside class="next-peek" aria-label="What happens next">
+          <strong>Choose the side that fits you.</strong>
+          NGOs request support. Helpers share what they can offer.
+        </aside>
+      </section>
+
+      <section class="content-band" aria-labelledby="how-it-works">
+        <div class="section-grid">
+          <div>
+            <h2 id="how-it-works">How it works</h2>
+            <p class="section-copy">
+              Keep this section short and human. The goal is to make visitors feel clear, trusted,
+              and ready to fill the right form.
+            </p>
+          </div>
+
+          <div class="steps">
+            <article class="step">
+              <span class="step-number">1</span>
+              <h3>Pick your role</h3>
+              <p>Select NGO if you need clothing support, or Helper if you can contribute.</p>
+            </article>
+
+            <article class="step">
+              <span class="step-number">2</span>
+              <h3>Share details</h3>
+              <p>The Google Form collects the contact and location details needed to coordinate.</p>
+            </article>
+
+            <article class="step">
+              <span class="step-number">3</span>
+              <h3>Get connected</h3>
+              <p>Our team will match available helpers with the communities that need them.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="initiative-band" aria-labelledby="initiative-title">
+        <div class="initiative-content">
+          <h2 id="initiative-title">Our Initiative</h2>
+          <p>
+            Every year, thousands of perfectly usable clothes are discarded, burned, or left unused,
+            contributing to environmental pollution and unnecessary waste. At the same time,
+            countless children, elderly individuals, and underprivileged communities struggle to
+            access basic clothing.
+          </p>
+          <p>
+            Our initiative aims to bridge this gap by creating a simple and efficient connection
+            between clothing retailers, NGOs, orphanages, old-age homes, and charitable
+            organizations. Through our platform, clothing stores can easily share details of surplus,
+            unsold, or out-of-fashion garments that would otherwise go to waste. These clothes can
+            then be redirected to organizations that need them most, giving them a second life and
+            creating a meaningful social impact.
+          </p>
+          <p>
+            By connecting donors with beneficiaries, we strive to reduce textile waste, support
+            vulnerable communities, and promote a more sustainable and compassionate society.
+            Together, we can transform unused clothing from a source of pollution into a source of
+            dignity, comfort, and hope.
+          </p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Built for a simple idea: connect need with kindness.
+      </footer>
+    </main>
+  </body>
+</html>
